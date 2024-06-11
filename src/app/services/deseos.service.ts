@@ -21,6 +21,12 @@ export class DeseosService {
     this.listas.push(nuevaLista);
     this.guardarStorage();
 
+    return nuevaLista.id;
+
+   }
+
+   obtenerLista(id:number){
+    return this.listas.find(listaData => { return listaData.id === id});
    }
 
    cargarStorage(){
