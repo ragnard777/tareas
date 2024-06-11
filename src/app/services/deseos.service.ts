@@ -12,12 +12,19 @@ export class DeseosService {
 
   constructor() {
     console.log('Servicio inicializado');
-    const lista1 = new Lista('Recolectar piedras del infinito');
+   /*  const lista1 = new Lista('Recolectar piedras del infinito');
     const lista2 = new Lista('Heroes a desaparecer');
     
     this.listas.push(lista1,lista2)
-    console.log(this.listas);
+    console.log(this.listas); */
     
+   }
+
+   crearLista(titulo:string){
+
+    const nuevaLista = new Lista(titulo);
+    this.listas.push(nuevaLista);
+
    }
 
 
