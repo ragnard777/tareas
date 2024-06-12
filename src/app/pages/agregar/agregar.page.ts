@@ -31,7 +31,7 @@ export class AgregarPage implements OnInit {
       return;
     }
     const nuevoItem = new ListaItem(this.nombreItem);
-    this.lista?.items.push(nuevoItem);
+    this.lista!.items.push(nuevoItem);
     this.nombreItem = '';
   }
 

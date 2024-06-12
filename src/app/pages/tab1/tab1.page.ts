@@ -50,4 +50,11 @@ export class Tab1Page {
     await alert.present();
     /* this.router.navigateByUrl('tabs/tab1/agregar'); */
   }
+
+  borrar(item:number){
+    console.log();
+    
+    this.deseosService.listas.splice(item,1);
+    this.deseosService.guardarStorage();
+  }
 }
