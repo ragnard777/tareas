@@ -8,7 +8,7 @@ export class Lista {
     id:number;
     titulo:string;
     creadaEn:Date;
-    terminandaEn?:Date;
+    terminandaEn:Date | undefined;
     terminada:boolean;
     items: ListaItem[];
 

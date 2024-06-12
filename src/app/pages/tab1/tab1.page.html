@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     <ion-item *ngFor="let lista of deseosService.listas" detail>
-      <ion-label> {{lista.titulo}} </ion-label>
+      <ion-label routerLink="/tabs/tab1/agregar/{{lista.id}}"> {{lista.titulo}} </ion-label>
     </ion-item>
   </ion-list>
   <ion-fab (click)="agregarLista()" vertical="bottom" horizontal="end" slot="fixed">

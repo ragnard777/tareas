@@ -17,7 +17,7 @@ export class AgregarPage implements OnInit {
   constructor(private deseosService:DeseosService, private route:ActivatedRoute) {
     const listaId = Number(this.route.snapshot.paramMap.get('listaId'));
     this.lista = this.deseosService.obtenerLista(listaId);
-    console.log(this.lista);
+    console.log("Agregar page despues de obtener lista",this.lista);
     
    }
 
@@ -35,6 +35,36 @@ export class AgregarPage implements OnInit {
     this.nombreItem = '';
   }
 
+  cambioCheck(item:ListaItem){
+    console.log(item);
+
+    //retorna un arreglo con todos los items pendientes.
+    const pendientes = this.lista?.items.filter(itemData => {
+      return !itemData.completado;
+    }).length;
+
+    console.log({pendientes});
+
+    if(pendientes === 0){
+      this.lista!.terminandaEn = new Date();
+      this.lista!.terminada = true;
+    }else {
+      this.lista!.terminandaEn = undefined;
+      this.lista!.terminada = false;
+    }
+    
+
+    this.deseosService.guardarStorage();
+    console.log("Listas despues de guardar ",this.deseosService.listas);
+    
+    
+  }
+
+  borrar(item:number){
+   this.lista?.items.splice(item,1);
+   this.deseosService.guardarStorage();
+    
+  }
 
 
 }
