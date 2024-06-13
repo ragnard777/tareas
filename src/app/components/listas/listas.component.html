@@ -1,9 +1,9 @@
 <ion-list>
 
-  <ion-item-sliding *ngFor="let lista of deseosService.listas" detail class="animated fadeInDown">
+  <ion-item-sliding *ngFor="let lista of deseosService.listas | filtroCompletado:terminada" detail class="animated fadeInDown">
   <ion-item detail>
     <ion-label routerLink="/tabs/tab1/agregar/{{lista.id}}"> {{lista.titulo}} </ion-label>
-    <ion-note slot="end">{{lista.items.length}}</ion-note>
+    <ion-note color="primary" slot="end">{{lista.items.length}}</ion-note>
   </ion-item>
   <ion-item-options>
     <ion-item-option (click)="borrarLista(lista)" color="danger">
