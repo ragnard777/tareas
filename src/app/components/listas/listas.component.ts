@@ -24,11 +24,13 @@ export class ListasComponent  implements OnInit {
     }
   }
 
-  borrar(item:number){
-    console.log();
+  borrarLista(item:Lista){
+    console.log("Metodo borrarLista ", item);
     
-    this.deseosService.listas.splice(item,1);
-    this.deseosService.guardarStorage();
+    this.deseosService.borrarLista(item)
+    
+    /* this.deseosService.listas.splice(item,1);
+    this.deseosService.guardarStorage(); */
   }
 
 }

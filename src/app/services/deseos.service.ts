@@ -40,5 +40,14 @@ export class DeseosService {
 
 }
 
+borrarLista(lista:Lista){
+    //retorna un nuevo array que no tenga el valor que le envias.
+    console.log("Borrar lista antes de borrar el elemento", this.listas);
+    this.listas = this.listas.filter(listaData => listaData.id !== lista.id);
+    console.log("Borrar lista sin el elemento seleccionado", this.listas);
+    this.guardarStorage();
+    
+}
+
 
 }
