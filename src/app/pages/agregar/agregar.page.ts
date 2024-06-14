@@ -28,12 +28,17 @@ export class AgregarPage implements OnInit {
   }
 
   agregarItem(){
+    console.log(this.lista?.items);
+    
     if(this.nombreItem.length === 0){
       return;
     }
     const nuevoItem = new ListaItem(this.nombreItem);
     this.lista!.items.push(nuevoItem);
+    console.log(this.lista?.items);
     this.nombreItem = '';
+    this.cambioCheck(nuevoItem);
+
   }
 
   cambioCheck(item:ListaItem){
@@ -46,14 +51,7 @@ export class AgregarPage implements OnInit {
 
     console.log({pendientes});
 
-    if(pendientes === 0){
-      this.lista!.terminandaEn = new Date();
-      this.lista!.terminada = true;
-    }else {
-      this.lista!.terminandaEn = undefined;
-      this.lista!.terminada = false;
-    }
-    
+    this.validarPendientes(pendientes);
 
     this.deseosService.guardarStorage();
     console.log("Listas despues de guardar ",this.deseosService.listas);
@@ -65,6 +63,19 @@ export class AgregarPage implements OnInit {
    this.lista?.items.splice(item,1);
    this.deseosService.guardarStorage();
     
+  }
+
+  validarPendientes(pendientes:number | undefined){
+    if(pendientes === 0){
+      console.log("pendiente igual a 0 terminada en true");
+      
+      this.lista!.terminandaEn = new Date();
+      this.lista!.terminada = true;
+    }else {
+      console.log("pendiente mayor a 0 terminada en false");
+      this.lista!.terminandaEn = undefined;
+      this.lista!.terminada = false;
+    }
   }
 
 
