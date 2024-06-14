@@ -60,8 +60,24 @@ export class AgregarPage implements OnInit {
   }
 
   borrar(item:number){
-   this.lista?.items.splice(item,1);
+
+   
+    this.lista!.items = this.lista!.items.filter((elem,index) =>{
+      return index !== item;
+    });
+
+    const pend = this.lista?.items.filter(itemData => {
+      return !itemData.completado;
+    }).length;
+    if(pend === 0){
+      this.lista!.terminada = true;
+    }
+    if(this.lista!.items.length === 0){
+      console.log("eliminada lista");
+      
+    }
    this.deseosService.guardarStorage();
+   console.log(" despues de borrar", this.lista!.items);
     
   }
 
