@@ -8,29 +8,29 @@ import { DeseosService } from 'src/app/services/deseos.service';
   templateUrl: './listas.component.html',
   styleUrls: ['./listas.component.scss'],
 })
-export class ListasComponent  implements OnInit {
-
+export class ListasComponent implements OnInit {
   @Input() terminada = true;
 
-  constructor(public deseosService: DeseosService,private router: Router) { }
+  constructor(public deseosService: DeseosService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log();
+  }
 
-  listaSeleccionada(lista:Lista){
-    if(this.terminada){
+  listaSeleccionada(lista: Lista) {
+    if (this.terminada) {
       this.router.navigateByUrl(`/tabs/tab2/agregar/{{lista.id}}`);
-    }else{
+    } else {
       this.router.navigateByUrl(`/tabs/tab1/agregar/{{lista.id}}`);
     }
   }
 
-  borrarLista(item:Lista){
-    console.log("Metodo borrarLista ", item);
-    
-    this.deseosService.borrarLista(item)
-    
+  borrarLista(item: Lista) {
+    console.log('Metodo borrarLista ', item);
+
+    this.deseosService.borrarLista(item);
+
     /* this.deseosService.listas.splice(item,1);
     this.deseosService.guardarStorage(); */
   }
-
 }

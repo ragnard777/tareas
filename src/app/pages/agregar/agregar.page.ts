@@ -11,26 +11,26 @@ import { DeseosService } from 'src/app/services/deseos.service';
   styleUrls: ['./agregar.page.scss'],
 })
 export class AgregarPage implements OnInit {
-
-  lista:Lista | undefined;
+  lista: Lista | undefined;
   nombreItem = '';
 
-  constructor(private deseosService:DeseosService, private route:ActivatedRoute) {
+  constructor(
+    private deseosService: DeseosService,
+    private route: ActivatedRoute
+  ) {
     const listaId = Number(this.route.snapshot.paramMap.get('listaId'));
     this.lista = this.deseosService.obtenerLista(listaId);
-    console.log("Agregar page despues de obtener lista",this.lista);
-    
-   }
-
-
-
-  ngOnInit() {
+    console.log('Agregar page despues de obtener lista', this.lista);
   }
 
-  agregarItem(){
+  ngOnInit() {
+    console.log();
+  }
+
+  agregarItem() {
     console.log(this.lista?.items);
-    
-    if(this.nombreItem.length === 0){
+
+    if (this.nombreItem.length === 0) {
       return;
     }
     const nuevoItem = new ListaItem(this.nombreItem);
@@ -38,61 +38,52 @@ export class AgregarPage implements OnInit {
     console.log(this.lista?.items);
     this.nombreItem = '';
     this.cambioCheck(nuevoItem);
-
   }
 
-  cambioCheck(item:ListaItem){
+  cambioCheck(item: ListaItem) {
     console.log(item);
 
     //retorna un arreglo con todos los items pendientes.
-    const pendientes = this.lista?.items.filter(itemData => {
+    const pendientes = this.lista?.items.filter((itemData) => {
       return !itemData.completado;
     }).length;
 
-    console.log({pendientes});
+    console.log({ pendientes });
 
     this.validarPendientes(pendientes);
 
     this.deseosService.guardarStorage();
-    console.log("Listas despues de guardar ",this.deseosService.listas);
-    
-    
+    console.log('Listas despues de guardar ', this.deseosService.listas);
   }
 
-  borrar(item:number){
-
-   
-    this.lista!.items = this.lista!.items.filter((elem,index) =>{
+  borrar(item: number) {
+    this.lista!.items = this.lista!.items.filter((elem, index) => {
       return index !== item;
     });
 
-    const pend = this.lista?.items.filter(itemData => {
+    const pend = this.lista?.items.filter((itemData) => {
       return !itemData.completado;
     }).length;
-    if(pend === 0){
+    if (pend === 0) {
       this.lista!.terminada = true;
     }
-    if(this.lista!.items.length === 0){
-      console.log("eliminada lista");
-      
+    if (this.lista!.items.length === 0) {
+      console.log('eliminada lista');
     }
-   this.deseosService.guardarStorage();
-   console.log(" despues de borrar", this.lista!.items);
-    
+    this.deseosService.guardarStorage();
+    console.log(' despues de borrar', this.lista!.items);
   }
 
-  validarPendientes(pendientes:number | undefined){
-    if(pendientes === 0){
-      console.log("pendiente igual a 0 terminada en true");
-      
+  validarPendientes(pendientes: number | undefined) {
+    if (pendientes === 0) {
+      console.log('pendiente igual a 0 terminada en true');
+
       this.lista!.terminandaEn = new Date();
       this.lista!.terminada = true;
-    }else {
-      console.log("pendiente mayor a 0 terminada en false");
+    } else {
+      console.log('pendiente mayor a 0 terminada en false');
       this.lista!.terminandaEn = undefined;
       this.lista!.terminada = false;
     }
   }
-
-
 }
